@@ -1,0 +1,41 @@
+BOTÁNICA ESENCIAL — ARCHIVOS PARA INSTALAR EN iOS
+
+QUÉ INCLUYE
+- App web instalable (PWA) con diseño adaptado a iPhone/iPad.
+- Enciclopedia inicial de aceites esenciales.
+- Trivial con explicación de cada respuesta.
+- Estadísticas locales individuales.
+- Estructura preparada para clasificación compartida mediante Firebase.
+- Caché para abrir el contenido principal sin conexión después de cargarlo.
+
+IMPORTANTE SOBRE LA CLASIFICACIÓN COMPARTIDA
+En esta versión, las estadísticas locales funcionan sin configurar servicios externos. Para que los dos dispositivos vean una clasificación compartida, hay que configurar una base de datos Firebase. No está activada por defecto: no existe una cuenta/proyecto Firebase proporcionado por el usuario y no se debe inventar uno.
+
+PUBLICAR EN HTTPS DESDE EL IPAD
+Necesitas un servicio de alojamiento HTTPS. Una opción sencilla es GitHub Pages:
+1. En Safari, inicia sesión o crea una cuenta en GitHub.
+2. Crea un repositorio nuevo, por ejemplo botanica-esencial. Si quieres mantenerlo privado, revisa las limitaciones del plan para Pages; para una web pública, el repositorio suele ser público.
+3. Sube TODOS los archivos de esta carpeta a la raíz del repositorio (index.html, manifest.webmanifest, sw.js, firebase-config.js, icon.svg, icon-192.png e icon-512.png).
+4. En el repositorio, abre Settings → Pages. Selecciona desplegar desde la rama principal y la carpeta raíz.
+5. Espera a que GitHub Pages te dé una URL HTTPS.
+6. Abre esa URL en Safari en el iPad y en el iPhone de tu novia.
+7. En Safari: botón Compartir → Añadir a pantalla de inicio. Activa “Abrir como app” si aparece esa opción.
+8. Prueba la app en ambos dispositivos.
+
+ICONOS
+Los PNG son iconos requeridos por el manifiesto; icon.svg es una alternativa vectorial.
+
+ACTIVAR CLASIFICACIÓN COMPARTIDA (FIREBASE)
+1. En https://console.firebase.google.com/ crea un proyecto.
+2. Añade una aplicación web y copia su configuración.
+3. Activa Cloud Firestore.
+4. Copia la configuración web en firebase-config.js, reemplazando window.FIREBASE_CONFIG = null por el objeto de configuración.
+5. Configura reglas de Firestore apropiadas antes de compartir. La versión de demostración no implementa cuentas verificadas ni protección fuerte contra puntuaciones falsas; no la uses para información privada. Para un uso público, conviene añadir autenticación anónima o por cuenta y reglas que limiten escritura/lectura.
+6. Vuelve a subir firebase-config.js y recarga la web en ambos dispositivos.
+
+AVISO TÉCNICO
+- Firebase se usa desde CDN y requiere internet para sincronizar la clasificación.
+- La clasificación de esta demo guarda una puntuación por alias, no autentica de forma robusta que una puntuación sea legítima. No uses nombres completos ni datos personales.
+- El progreso local queda guardado en el navegador de cada dispositivo y no se sincroniza entre ellos.
+- El contenido es educativo, no consejo médico. La seguridad varía según producto, especie, concentración y vía de exposición.
+- No se puede garantizar que los datos del navegador duren para siempre: conserva copias y evita borrar los datos de Safari si quieres mantener el progreso local.
